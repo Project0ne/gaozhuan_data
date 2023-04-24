@@ -15,10 +15,10 @@ df = pd.read_csv(url, header=None)
 ids = df[0].tolist()
 
 # 定义 CSV 文件的字段名
-fieldnames = ["id", "product_id", "caption", "picture", "pictures", "eshop_price", "price", "caption_en", "discount", "type", "color_id", "ldd_catalog", "inventory", "buy_limit", "ldraw_no", "npd_sign", "ldd_code", "sale_volume", "rand" ,"variety", "color_data"]
+fieldnames = ["id", "product_id", "caption", "picture", "pictures", "eshop_price", "price", "caption_en", "color_id", "ldd_catalog", "inventory", "ldraw_no","ldd_code", "sale_volume", "rand"]
 
 # 增加 color_data 里面的字段名
-color_data_fieldnames = ["main_id", "name", "lego_color_id", "font-color", "color", "colorType", "ldraw_color_id", "ldraw_color_value", "index", "name_en", "is_show"]
+color_data_fieldnames = ["main_id","id", "name", "lego_color_id", "font-color", "color", "colorType", "ldraw_color_id", "ldraw_color_value", "index", "name_en"]
 
 # 合并所有的字段名
 all_fieldnames = fieldnames + color_data_fieldnames
