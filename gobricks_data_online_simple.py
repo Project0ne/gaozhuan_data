@@ -42,8 +42,9 @@ def fetch_data(id):
         # 把 d 中只包含我们需要的字段的部分保存到 filtered_data 里面
         filtered_data.append({k: v for k, v in d.items() if k in all_fieldnames})
         # 把 ldraw_no 对应的数值统一用逗号分隔
-        if filtered_data[-1]['ldraw_no']:
-            filtered_data[-1]['ldraw_no'] = filtered_data[-1]['ldraw_no'].replace(' ', ',').replace(';', ',')
+        if filtered_data[-1]['ldraw_no'] is not None:
+            if ',' in filtered_data[-1]['ldraw_no']:
+                filtered_data[-1]['ldraw_no'] = filtered_data[-1]['ldraw_no'].split(',')[0]
     # 更新进度条
     pbar.update(1)
     return filtered_data
