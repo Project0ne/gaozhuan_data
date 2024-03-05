@@ -1,27 +1,24 @@
-name: Daily Data Update
+name: PyInstaller Build
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  fetch_data:
-    runs-on: ubuntu-latest
+  pyinstaller-build:
+    runs-on: windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Create executable for data.py
+        uses: sayyid5416/pyinstaller@v1
         with:
-          python-version: '3.10'
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Run script
-        run: python Project0ne/gaozhuan_data/blob/main/main.py
-        
-      - name: Send data.csv to webhook
-        run: |
-          curl -X POST -H 'Content-Type: application/json' -d '{"file": "@data.csv"}' https://oapi.dingtalk.com/robot/send?access_token=abf86f19586c7129578b4ffb9ab69f5e679c20df1b3a14b7eb21e21e62947eab
+          spec: https://raw.githubusercontent.com/Project0ne/gaozhuan_data/main/data.py
+          options: --noconfirm,--onefile,--console
+          upload_exe_with_name: data.exe
+      - name: Create executable for detail.py
+        uses: sayyid5416/pyinstaller@v1
+        with:
+          spec: https://raw.githubusercontent.com/Project0ne/gaozhuan_data/main/detail.py
+          options: --noconfirm,--onefile,--console
+          upload_exe_with_name: detail.exe
